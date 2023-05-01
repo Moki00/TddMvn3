@@ -5,12 +5,12 @@ import java.util.function.Predicate;
 public class PhoneNumValidator implements Predicate<String> {
 
 
-    public boolean validate(String phoneNum) {
-        return false;
+    @Override
+    public boolean test(String phoneNum) {
+
+        return phoneNum.startsWith("+1") &&
+                phoneNum.length()==10;
     }
 
-    @Override
-    public boolean test(String s) {
-        return false;
-    }
+
 }
