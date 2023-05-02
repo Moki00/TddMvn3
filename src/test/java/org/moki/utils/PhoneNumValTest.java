@@ -5,9 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
-import static jdk.jshell.CompletenessAnalyzer.TK.TRUE;
-import static junit.framework.Assert.assertFalse;
-import static junit.framework.Assert.assertTrue;
+import static junit.framework.Assert.*;
 
 public class PhoneNumValTest {
 
@@ -19,20 +17,23 @@ public class PhoneNumValTest {
     }
 
     @ParameterizedTest
-    @CsvSource({"14703334444", "TRUE"})
-    void itShouldValidatePhoneNumber(String input, String expected){
-        //given
-        String phoneNum= "+";
+    @CsvSource({
+            "14703334444, TRUE",
+            "147026, FALSE",
+            "147026999123456789, FALSE"
+    })
+    void validatePhoneNumber(String phoneNum, boolean expected){
+
         //when
         boolean isValid = underTest.test(phoneNum);
         //then
-        assertTrue(isValid);
+        assertEquals(isValid, expected);
     }
 
     @Test
     void itShouldValidatePhoneNumberWhenTooShort(){
         //given
-        String phoneNum= "+147026";
+        String phoneNum= "+";
         //when
         boolean isValid = underTest.test(phoneNum);
         //then
@@ -42,7 +43,7 @@ public class PhoneNumValTest {
     @Test
     void itShouldValidatePhoneNumberWhenTooLong(){
         //given
-        String phoneNum= "+147026999123456789";
+        String phoneNum= "+";
         //when
         boolean isValid = underTest.test(phoneNum);
         //then

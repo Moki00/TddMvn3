@@ -8,8 +8,9 @@ public class PhoneNumValidator implements Predicate<String> {
     @Override
     public boolean test(String phoneNum) {
 
-        return phoneNum.startsWith("+1") &&
-                phoneNum.length()==10;
+        return phoneNum.startsWith("1") &&
+                phoneNum.length()>9 &&
+                phoneNum.length()<15;
     }
 
 
